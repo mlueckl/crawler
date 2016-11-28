@@ -4,9 +4,9 @@ from spider import Spider
 from domain import *
 from general import *
 
-PROJECT_NAME = 'reddit'
-HOMEPAGE = 'https://reddit.com/'
-DOMAIN_NAME = get_domain_name(HOMEPAGE)
+HOMEPAGE = input('URL to crawl: ') #'https://wired.com/'
+PROJECT_NAME = get_domain_name(HOMEPAGE)
+DOMAIN_NAME = get_domain(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'
 NUMBER_OF_THREADS = 8

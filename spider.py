@@ -1,6 +1,6 @@
-from urllib.request import urlopen
 from link_finder import LinkFinder
 from general import *
+import urllib.request
 
 class Spider:
 
@@ -43,16 +43,23 @@ class Spider:
         html_string = ''
 
         try:
-            response = urlopen(page_url)
-
-            if response.getheader('Content-Type') == 'text/html':
+            req = urllib.request.Request(
+                page_url,
+                data=None,
+                headers={
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36'
+                }
+            )
+            response = urllib.request.urlopen(req)
+            if 'text/html' in response.getheader('Content-Type'):
                 html_bytes = response.read()
                 html_string = html_bytes.decode('utf-8')
 
             finder = LinkFinder(Spider.base_url, page_url)
             finder.feed(html_string)
-        except:
+        except Exception as e:
             print('Error: Can not crawl page')
+            print(e)
             return set()
 
         return finder.page_links()

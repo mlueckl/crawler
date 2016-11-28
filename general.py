@@ -5,8 +5,6 @@ def create_project_dir(directory):
     if not os.path.exists(directory):
         print('Creating project:', directory)
         os.makedirs(directory)
-    else:
-        print('Project %s already exists' % directory)
 
 def create_data_files(project_name, base_url):
     queue = project_name + '/queue.txt'
